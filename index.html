@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Commit Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>GitHub Commit Visualizer</h1>
+            <p>Visualize your GitHub commit activity with interactive charts and insights</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="username" placeholder="Enter GitHub username..." class="search-input">
+                <button id="searchBtn" class="search-btn">Visualize Commits</button>
+            </div>
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Fetching your GitHub data...</p>
+            </div>
+        </section>
+
+        <!-- User Info -->
+        <section class="user-info" id="userInfo" style="display: none;">
+            <div class="user-card">
+                <img id="userAvatar" src="" alt="User Avatar" class="user-avatar">
+                <div class="user-details">
+                    <h2 id="userName"></h2>
+                    <p id="userBio"></p>
+                    <div class="user-stats">
+                        <span id="totalCommits"></span>
+                        <span id="totalRepos"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters" id="filters" style="display: none;">
+            <div class="filter-group">
+                <label for="timeRange">Time Range:</label>
+                <select id="timeRange" class="filter-select">
+                    <option value="30">Last 30 days</option>
+                    <option value="90">Last 90 days</option>
+                    <option value="365" selected>Last year</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="repoFilter">Repository:</label>
+                <select id="repoFilter" class="filter-select">
+                    <option value="all">All repositories</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section" id="chartsSection" style="display: none;">
+            <!-- Calendar Heatmap -->
+            <div class="chart-container">
+                <h3>Commit Activity Heatmap</h3>
+                <div class="heatmap-container">
+                    <div id="heatmap" class="heatmap"></div>
+                    <div class="heatmap-legend">
+                        <span>Less</span>
+                        <div class="legend-squares">
+                            <div class="legend-square" data-level="0"></div>
+                            <div class="legend-square" data-level="1"></div>
+                            <div class="legend-square" data-level="2"></div>
+                            <div class="legend-square" data-level="3"></div>
+                            <div class="legend-square" data-level="4"></div>
+                        </div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Commits per Day of Week -->
+                <div class="chart-container">
+                    <h3>Commits by Day of Week</h3>
+                    <canvas id="dayOfWeekChart"></canvas>
+                </div>
+
+                <!-- Commits per Time of Day -->
+                <div class="chart-container">
+                    <h3>Commits by Time of Day</h3>
+                    <canvas id="timeOfDayChart"></canvas>
+                </div>
+
+                <!-- Commits per Repository -->
+                <div class="chart-container">
+                    <h3>Commits by Repository</h3>
+                    <canvas id="repoChart"></canvas>
+                </div>
+
+                <!-- Monthly Activity -->
+                <div class="chart-container">
+                    <h3>Monthly Activity</h3>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section class="insights-section" id="insightsSection" style="display: none;">
+            <h3>Commit Insights</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4>Most Active Day</h4>
+                    <p id="mostActiveDay"></p>
+                </div>
+                <div class="insight-card">
+                    <h4>Most Active Time</h4>
+                    <p id="mostActiveTime"></p>
+                </div>
+                <div class="insight-card">
+                    <h4>Most Active Repository</h4>
+                    <p id="mostActiveRepo"></p>
+                </div>
+                <div class="insight-card">
+                    <h4>Average Commits/Day</h4>
+                    <p id="avgCommitsPerDay"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
